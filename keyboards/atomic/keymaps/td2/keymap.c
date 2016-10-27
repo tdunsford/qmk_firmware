@@ -36,6 +36,7 @@ enum keyboard_macros {
   MACRO_HELP_7,
   MACRO_HELP_8,
   MACRO_HELP_9,
+  HYPER_COPY,
 };
 
 #define M_QWRTY             M(MACRO_QWERTY)
@@ -62,7 +63,8 @@ enum keyboard_macros {
 #define M_HELP8             M(MACRO_HELP_8)
 #define M_HELP9             M(MACRO_HELP_9)
 
-#define M_HYPR              OSM(MOD_HYPR)
+// #define M_HYPR              OSM(MOD_HYPR)
+#define M_HYPR              M(HYPER_COPY)
 
 #define SC_UNDO             LCTL(KC_Z)
 #define SC_REDO             LCTL(KC_Y)
@@ -225,6 +227,20 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     // MACRODOWN only works in this function
     switch(id)
     {
+
+        case HYPER_COPY:
+            if (record->event.pressed) {
+                key_timer = timer_read(); // if the key is being pressed, we start the timer.
+            }
+            else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
+                if (timer_elapsed(key_timer) > 150) { // 150 being 150ms, the threshhold we pick for counting something as a tap.
+                    return MACRO( D(LCTL), T(C), U(LCTL), END  );
+                }
+                else {
+                    return MACRO( D(LCTL), T(V), U(LCTL), END  );
+                }
+            }
+            break;
 
         case MACRO_HELP_1:
             if (record->event.pressed)
