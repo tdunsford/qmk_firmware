@@ -221,6 +221,8 @@ const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_MODS_ONESHOT(MOD_LSFT),
 };
 
+static uint16_t key_timer;
+
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
 
