@@ -1,4 +1,4 @@
-#include "atomic.h"
+#include "atomicfn.h"
 
 void matrix_init_kb(void) {
     // put your keyboard start-up code here
