@@ -1,4 +1,4 @@
-#include "atomic.h"
+#include "atomicfn.h"
 #include "action_layer.h"
 #include "eeconfig.h"
 #include "led.h"
@@ -27,20 +27,17 @@ enum keyboard_macros {
   MACRO_MOUSE_MOVE_UR,
   MACRO_MOUSE_MOVE_DL,
   MACRO_MOUSE_MOVE_DR,
+  MACRO_HELP_1,
+  MACRO_HELP_2,
+  MACRO_HELP_3,
+  MACRO_HELP_4,
+  MACRO_HELP_5,
+  MACRO_HELP_6,
+  MACRO_HELP_7,
+  MACRO_HELP_8,
+  MACRO_HELP_9,
   HYPER_COPY,
   HYPER_PRINT,
-  HYPER_1,
-  HYPER_2,
-  HYPER_3,
-  HYPER_4,
-  HYPER_5,
-  HYPER_6,
-  HYPER_7,
-  HYPER_8,
-  HYPER_9,
-  HYPER_10,
-  HYPER_11,
-  HYPER_12,
 };
 
 #define M_QWRTY             M(MACRO_QWERTY)
@@ -57,23 +54,19 @@ enum keyboard_macros {
 #define M_MS_UR             M(MACRO_MOUSE_MOVE_UR)
 #define M_MS_DL             M(MACRO_MOUSE_MOVE_DL)
 #define M_MS_DR             M(MACRO_MOUSE_MOVE_DR)
+#define M_HELP1             M(MACRO_HELP_1)
+#define M_HELP2             M(MACRO_HELP_2)
+#define M_HELP3             M(MACRO_HELP_3)
+#define M_HELP4             M(MACRO_HELP_4)
+#define M_HELP5             M(MACRO_HELP_5)
+#define M_HELP6             M(MACRO_HELP_6)
+#define M_HELP7             M(MACRO_HELP_7)
+#define M_HELP8             M(MACRO_HELP_8)
+#define M_HELP9             M(MACRO_HELP_9)
 
-#define M_HYPR              OSM(MOD_HYPR)
-
-#define M_HCOPY     M(HYPER_COPY)
-#define M_HPRINT    M(HYPER_PRINT)
-#define MC_1        M(HYPER_1)
-#define MC_2        M(HYPER_2)
-#define MC_3        M(HYPER_3)
-#define MC_4        M(HYPER_4)
-#define MC_5        M(HYPER_5)
-#define MC_6        M(HYPER_6)
-#define MC_7        M(HYPER_7)
-#define MC_8        M(HYPER_8)
-#define MC_9        M(HYPER_9)
-#define MC_0        M(HYPER_10)
-#define MC_MINS     M(HYPER_11)
-#define MC_EQL      M(HYPER_12)
+// #define M_HYPR              OSM(MOD_HYPR)
+#define M_HYPR              M(HYPER_COPY)
+#define M_PRINT             M(HYPER_PRINT)
 
 #define SC_UNDO             LCTL(KC_Z)
 #define SC_REDO             LCTL(KC_Y)
@@ -110,11 +103,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   '--------------------------------------------------------------------------------------------------------------------------------------'
 */
 [LAYER_QWERTY] = {
-  { KC_ESC,  MC_1,    MC_2,    MC_3,    MC_4,    MC_5,    MC_6,    MC_7,    MC_8,    MC_9,    MC_0,    MC_MINS, MC_EQL,  KC_BSPC, KC_BSPC  },
-  { KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_DEL   },
-  { KC_RCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_ENT,  KC_HOME  },
-  { KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, M_HYPR,  M_HYPR,  KC_UP,   KC_END   },
-  { KC_LCTL, KC_LGUI, KC_NO,   KC_LALT, M_UPPER, KC_SPC,  KC_SPC,  M_LOWER, KC_PSCR, KC_SLCK, KC_HOME, KC_END,  KC_LEFT, KC_DOWN, KC_RGHT  }
+  { KC_ESC,  KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_PAUS, M_PRINT },
+  { KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_BSPC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_DEL  },
+  { KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_BSPC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS },
+  { KC_RCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_ENT,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_PGUP },
+  { KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, M_HYPR,  KC_UP,   KC_PGDN },
+  { KC_LCTL, KC_LGUI, KC_NO,   KC_LALT, M_UPPER, KC_SPC,  KC_SPC,  KC_SPC,  KC_SPC,  M_LOWER, KC_HOME, KC_END,  KC_LEFT, KC_DOWN, KC_RGHT }
 },
 
 /* LAYER = LAYER_UPPER
@@ -131,11 +125,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   '--------------------------------------------------------------------------------------------------------------------------------------'
 */
 [LAYER_UPPER] = {
-  { KC_GRV , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , _______, _______ },
-  { KC_PAUS, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_NLCK, KC_PSLS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, _______, _______, _______, KC_INS  },
-  { _______, KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_CAPS, KC_PAST, KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______, _______, _______, KC_HOME },
-  { _______, KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_SLCK, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, _______, _______, KC_PGUP, KC_END  },
-  { _______, _______, _______, _______, M_UPPER, KC_KP_0, KC_KP_0, _______, KC_RALT, KC_PDOT, KC_PENT, _______, KC_HOME, KC_PGDN, KC_END  }
+  { KC_ESC,  KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_PAUS, KC_BSPC },
+  { KC_PSCR, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_BSPC, KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , _______, KC_INS  },
+  { KC_PAUS, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_NLCK, KC_BSPC, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, _______, _______, _______, KC_INS  },
+  { _______, KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_CAPS, KC_ENT,  KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______, _______, _______, KC_HOME },
+  { _______, KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_SLCK, KC_ENT,  KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, _______, _______, KC_PGUP, KC_END  },
+  { _______, _______, _______, _______, M_UPPER, KC_SPC,  KC_SPC,  KC_KP_0, KC_KP_0, _______, KC_PENT, _______, KC_HOME, KC_PGDN, KC_END  }
 },
 /* LAYER = LAYER_LOWER
   .--------------------------------------------------------------------------------------------------------------------------------------.
@@ -151,11 +146,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   '--------------------------------------------------------------------------------------------------------------------------------------'
 */
 [LAYER_LOWER] = {
-  { KC_PSCR, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , _______, _______ },
-  { _______, KC_DLR , KC_LCBR, KC_LBRC, KC_LPRN, KC_PERC, KC_HASH, KC_RPRN, KC_RBRC, KC_RCBR, KC_AT  , _______, _______, _______, KC_INS  },
-  { _______, KC_CIRC, KC_ASTR, KC_PLUS, KC_MINS, KC_SLSH, KC_BSLS, KC_UNDS, KC_QUOT, KC_DQT , KC_GRV , _______, _______, _______, KC_HOME },
-  { _______, KC_PIPE, KC_AMPR, KC_EXLM, KC_TILD, KC_SCLN, KC_COLN, KC_EQL , KC_LT  , KC_GT  , KC_QUES, _______, _______, KC_PGUP, KC_END  },
-  { _______, _______, _______, _______, _______, _______, _______, M_LOWER, _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_END  }
+  { KC_ESC,  KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_PAUS, KC_PSCR },
+  { KC_PSCR, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_BSPC, KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 , _______, _______ },
+  { KC_PAUS, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_NLCK, KC_BSPC, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, _______, _______, _______, KC_INS  },
+  { _______, KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_CAPS, KC_ENT,  KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, _______, _______, _______, KC_HOME },
+  { _______, KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_SLCK, KC_ENT,  KC_KP_1, KC_KP_2, KC_KP_3, KC_PENT, _______, _______, KC_PGUP, KC_END  },
+  { _______, _______, _______, _______, M_UPPER, KC_SPC,  KC_SPC,  KC_KP_0, KC_KP_0, M_LOWER, KC_PENT, _______, KC_HOME, KC_PGDN, KC_END  }
 },
 /* LAYER = LAYER_FUNCTION
   .--------------------------------------------------------------------------------------------------------------------------------------.
@@ -171,6 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   '--------------------------------------------------------------------------------------------------------------------------------------'
 */
 [LAYER_FUNCTION] = {
+  { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
   { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
   { XXXXXXX, KC_F13 , KC_F14 , KC_F15 , KC_F16 , KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
   { XXXXXXX, KC_F17 , KC_F18 , KC_F19 , KC_F20 , KC_SLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
@@ -192,10 +189,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [LAYER_MOUSE] = {
   { M_QWRTY, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
+  { M_QWRTY, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
   { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_MS_UL, KC_MS_U, M_MS_UR, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_R },
   { XXXXXXX, KC_BTN5, KC_BTN4, KC_BTN3, KC_BTN2, XXXXXXX, XXXXXXX, KC_MS_L, XXXXXXX, KC_MS_R, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_U },
   { _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_MS_DL, KC_MS_D, M_MS_DR, XXXXXXX, _______, _______, KC_MS_U, KC_WH_D },
-  { _______, _______, _______, _______, M_UPPER, KC_BTN1, KC_BTN1, M_LOWER, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R }
+  { _______, _______, _______, _______, M_UPPER, KC_BTN1, KC_BTN1, KC_BTN1, KC_BTN1, M_LOWER, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R }
 },
 /* LAYER = LAYER_ADJUST
   .--------------------------------------------------------------------------------------------------------------------------------------.
@@ -211,11 +209,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   '--------------------------------------------------------------------------------------------------------------------------------------'
 */
 [LAYER_ADJUST] = {
-  { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MU_TOG , AU_TOG , XXXXXXX, XXXXXXX },
+  { XXXXXXX, M_HELP1, M_HELP2, M_HELP3, M_HELP4, M_HELP5, M_HELP6, M_HELP7, M_HELP8, M_HELP9, XXXXXXX, MU_TOG , AU_TOG , XXXXXXX, XXXXXXX },
+  { XXXXXXX, M_HELP1, M_HELP2, M_HELP3, M_HELP4, M_HELP5, M_HELP6, M_HELP7, M_HELP8, M_HELP9, XXXXXXX, MU_TOG , AU_TOG , XXXXXXX, XXXXXXX },
   { XXXXXXX, M_BRTOG, M_BSPDU, M_BSPDD, M_BDFLT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
   { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX },
-  { XXXXXXX, M_QWRTY, XXXXXXX, XXXXXXX, M_BACKL, RESET  , XXXXXXX, M_MOUSE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , XXXXXXX },
-  { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_UPPER, XXXXXXX, XXXXXXX, M_LOWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , XXXXXXX }
+  { XXXXXXX, M_QWRTY, XXXXXXX, XXXXXXX, M_BACKL, RESET  , XXXXXXX, XXXXXXX, M_MOUSE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , XXXXXXX },
+  { XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_UPPER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, M_LOWER,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX , XXXXXXX }
 },
 };
 
@@ -267,22 +266,71 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                 }
             }
             break;
-         case HYPER_1:
-            if (record->event.pressed) {
-                key_timer = timer_read(); // if the key is being pressed, we start the timer.
+
+        case MACRO_HELP_1:
+            if (record->event.pressed)
+            {
+        uprintf("1");
             }
-            else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
-                if (timer_elapsed(key_timer) > 150) { // 150 being 150ms, the threshhold we pick for counting something as a tap.
-                    register_code(KC_F1);
-                    unregister_code(KC_F1);
-                }
-                else {
-                    register_code(KC_1);
-                    unregister_code(KC_1);
-                }
+            break;
+
+        case MACRO_HELP_2:
+            if (record->event.pressed)
+            {
+        uprintf("2");
             }
-            break;           
-         case MACRO_BREATH_TOGGLE:
+            break;
+
+        case MACRO_HELP_3:
+            if (record->event.pressed)
+            {
+        uprintf("3");
+            }
+            break;
+
+        case MACRO_HELP_4:
+            if (record->event.pressed)
+            {
+        uprintf("4");
+            }
+            break;
+
+        case MACRO_HELP_5:
+            if (record->event.pressed)
+            {
+        uprintf("5");
+            }
+            break;
+
+        case MACRO_HELP_6:
+            if (record->event.pressed)
+            {
+        uprintf("6");
+            }
+            break;
+
+        case MACRO_HELP_7:
+            if (record->event.pressed)
+            {
+        uprintf("7");
+            }
+            break;
+
+        case MACRO_HELP_8:
+            if (record->event.pressed)
+            {
+        uprintf("8");
+            }
+            break;
+
+        case MACRO_HELP_9:
+            if (record->event.pressed)
+            {
+        uprintf("9");
+            }
+            break;
+
+        case MACRO_BREATH_TOGGLE:
             if (record->event.pressed)
             {
                 breathing_toggle();
